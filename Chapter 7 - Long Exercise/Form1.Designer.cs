@@ -32,6 +32,8 @@
             this.btnGoHere = new System.Windows.Forms.Button();
             this.cmbxExits = new System.Windows.Forms.ComboBox();
             this.btnThruDoor = new System.Windows.Forms.Button();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.btnHide = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbxDescription
@@ -72,11 +74,33 @@
             this.btnThruDoor.Visible = false;
             this.btnThruDoor.Click += new System.EventHandler(this.btnThruDoor_Click);
             // 
+            // btnCheck
+            // 
+            this.btnCheck.Location = new System.Drawing.Point(3, 244);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(190, 23);
+            this.btnCheck.TabIndex = 4;
+            this.btnCheck.Text = "Check!";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Visible = false;
+            // 
+            // btnHide
+            // 
+            this.btnHide.Location = new System.Drawing.Point(197, 244);
+            this.btnHide.Name = "btnHide";
+            this.btnHide.Size = new System.Drawing.Size(190, 23);
+            this.btnHide.TabIndex = 5;
+            this.btnHide.Text = "Hide!";
+            this.btnHide.UseVisualStyleBackColor = true;
+            this.btnHide.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 262);
+            this.ClientSize = new System.Drawing.Size(390, 273);
+            this.Controls.Add(this.btnHide);
+            this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.btnThruDoor);
             this.Controls.Add(this.cmbxExits);
             this.Controls.Add(this.btnGoHere);
@@ -94,6 +118,8 @@
         private System.Windows.Forms.Button btnGoHere;
         private System.Windows.Forms.ComboBox cmbxExits;
         private System.Windows.Forms.Button btnThruDoor;
+        private System.Windows.Forms.Button btnCheck;
+        private System.Windows.Forms.Button btnHide;
     }
 }
 

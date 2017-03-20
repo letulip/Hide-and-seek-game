@@ -17,16 +17,23 @@ namespace Chapter_7___Long_Exercise
         RoomWithDoor livingRoom;
         RoomWithDoor kitchen;
         Room diningRoom;
+        Room stairs;
+        Room upstairsHallway;
+        Room masterBedroom;
+        Room guestBedroom;
+        Room bathroom;
 
         OutsideWithDoor frontYard;
         OutsideWithDoor backYard;
         Outside garden;
+        Outside driveWay;
+        Outside garage;
 
         public Form1()
         {
             InitializeComponent();
             CreateObjects();
-            MoveToANewLocation(frontYard);
+            MoveToANewLocation(driveWay);
             
         }
 
@@ -61,19 +68,33 @@ namespace Chapter_7___Long_Exercise
         private void CreateObjects()
         {
             garden = new Outside("Garden", true);
+            driveWay = new Outside("Driveway", false);
+            garage = new Outside("Garage", false);
             backYard = new OutsideWithDoor("Back Yard", true, "a screen door.");
             frontYard = new OutsideWithDoor("Front Yard", false, "an oak door with brass knob.");
             livingRoom = new RoomWithDoor("Living Room", "an antique carpet", "an oak door with brass knob.");
             kitchen = new RoomWithDoor("Kitchen", "stainless steel appliances", "a screen door.");
             diningRoom = new Room("Dining Room", "table in the middle and the sofa");
+            stairs = new Room("Stairs", "wooden bannister");
+            upstairsHallway = new Room("Upstairs hallway", "picture of a dog and closet");
+            masterBedroom = new Room("Master bedroom", "large bed");
+            guestBedroom = new Room("Guest bedroom", "couple small beds");
+            bathroom = new Room("Bathroom", "shower, sink and toilet");
 
             frontYard.Exits = new Location[] { backYard, garden };
             backYard.Exits = new Location[] { frontYard, garden };
             garden.Exits = new Location[] { frontYard, backYard };
+            driveWay.Exits = new Location[] { frontYard, garage };
+            garage.Exits = new Location[] { driveWay, frontYard };
 
-            livingRoom.Exits = new Location[] { diningRoom };
+            livingRoom.Exits = new Location[] { diningRoom, stairs };
             kitchen.Exits = new Location[] { diningRoom };
             diningRoom.Exits = new Location[] { livingRoom, kitchen };
+            stairs.Exits = new Location[] { upstairsHallway, livingRoom };
+            upstairsHallway.Exits = new Location[] { masterBedroom, guestBedroom, bathroom };
+            masterBedroom.Exits = new Location[] { upstairsHallway };
+            guestBedroom.Exits = new Location[] { upstairsHallway };
+            bathroom.Exits = new Location[] { upstairsHallway };
 
             livingRoom.DoorLocation = frontYard;
             frontYard.DoorLocation = livingRoom;
