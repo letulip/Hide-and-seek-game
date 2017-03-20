@@ -114,7 +114,7 @@ namespace Chapter_7___Long_Exercise
         {
             if(opponent.Check(currentLocation))
             {
-                
+                ResetGame();
             }
         }
 
