@@ -29,11 +29,13 @@ namespace Chapter_7___Long_Exercise
         Outside driveWay;
         Outside garage;
 
+        Opponent opponent;
+        
         public Form1()
         {
             InitializeComponent();
             CreateObjects();
-            MoveToANewLocation(driveWay);
+            //MoveToANewLocation(driveWay);
             
         }
 
@@ -101,6 +103,27 @@ namespace Chapter_7___Long_Exercise
 
             kitchen.DoorLocation = backYard;
             backYard.DoorLocation = kitchen;
+
+            opponent = new Opponent(currentLocation);
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            opponent.Check(currentLocation);
+        }
+
+        private void btnHide_Click(object sender, EventArgs e)
+        {
+            btnHide.Visible = false;
+            btnCheck.Visible = true;
+            btnGoHere.Visible = true;
+            cmbxExits.Visible = true;
+
+            for (int i = 0; i < 10; i++)
+            {
+                tbxDescription.Text = (i + 1).ToString();
+                opponent.Move();
+            }
         }
     }
 }

@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbxDescription = new System.Windows.Forms.TextBox();
             this.btnGoHere = new System.Windows.Forms.Button();
             this.cmbxExits = new System.Windows.Forms.ComboBox();
             this.btnThruDoor = new System.Windows.Forms.Button();
             this.btnCheck = new System.Windows.Forms.Button();
             this.btnHide = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // tbxDescription
@@ -52,6 +54,7 @@
             this.btnGoHere.TabIndex = 1;
             this.btnGoHere.Text = "Go here:";
             this.btnGoHere.UseVisualStyleBackColor = true;
+            this.btnGoHere.Visible = false;
             this.btnGoHere.Click += new System.EventHandler(this.btnGoHere_Click);
             // 
             // cmbxExits
@@ -62,6 +65,7 @@
             this.cmbxExits.Name = "cmbxExits";
             this.cmbxExits.Size = new System.Drawing.Size(302, 21);
             this.cmbxExits.TabIndex = 2;
+            this.cmbxExits.Visible = false;
             // 
             // btnThruDoor
             // 
@@ -83,6 +87,7 @@
             this.btnCheck.Text = "Check!";
             this.btnCheck.UseVisualStyleBackColor = true;
             this.btnCheck.Visible = false;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
             // 
             // btnHide
             // 
@@ -92,7 +97,7 @@
             this.btnHide.TabIndex = 5;
             this.btnHide.Text = "Hide!";
             this.btnHide.UseVisualStyleBackColor = true;
-            this.btnHide.Visible = false;
+            this.btnHide.Click += new System.EventHandler(this.btnHide_Click);
             // 
             // Form1
             // 
@@ -120,6 +125,7 @@
         private System.Windows.Forms.Button btnThruDoor;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.Button btnHide;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
