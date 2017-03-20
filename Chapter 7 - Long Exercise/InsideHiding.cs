@@ -8,15 +8,18 @@ namespace Chapter_7___Long_Exercise
 {
     class InsideHiding : Room, IHidingPlace
     {
-        public InsideHiding(string name, string decor) : base(name, decor)
+        public InsideHiding(string name, string decor, string hidingPlace) : base(name, decor)
         {
+            HidingPlaceName = hidingPlace;
         }
 
-        public string HidingPlace
+        public string HidingPlaceName { get; }
+
+        public override string Description
         {
             get
             {
-                throw new NotImplementedException();
+                return base.Description + " Someone could hide" + HidingPlaceName + ".";
             }
         }
     }

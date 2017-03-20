@@ -8,15 +8,18 @@ namespace Chapter_7___Long_Exercise
 {
     class OutsideHiding : Outside, IHidingPlace
     {
-        public OutsideHiding(string name, bool hot) : base(name, hot)
+        public OutsideHiding(string name, bool hot, string hidingPlace) : base(name, hot)
         {
+            HidingPlaceName = hidingPlace;
         }
 
-        public string HidingPlace
+        public string HidingPlaceName { get; }
+
+        public override string Description
         {
             get
             {
-                throw new NotImplementedException();
+                return base.Description + " Someone could hide" + HidingPlaceName + ".";
             }
         }
     }

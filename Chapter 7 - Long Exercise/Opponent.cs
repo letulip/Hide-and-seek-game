@@ -18,12 +18,26 @@ namespace Chapter_7___Long_Exercise
 
         public void Move()
         {
-            if(myLocation is IHasExteriorDoor)
-                if(rnd.Next(2) == 1)
+            bool hidden = false;
+
+            while (!hidden)
+            {
+                if (myLocation is IHasExteriorDoor)
                 {
+                    IHasExteriorDoor locWithDoor = myLocation as IHasExteriorDoor;
+                    if (rnd.Next(2) == 1)
+                    {
+                        myLocation = locWithDoor.DoorLocation;
+                    }
 
                 }
-                    
+
+                int randomLoc = rnd.Next(myLocation.Exits.Length);
+                myLocation = myLocation.Exits[randomLoc];
+
+                if (myLocation is IHidingPlace)
+                    hidden = true;
+            } 
         }
 
         public bool Check(Location location)

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Chapter_7___Long_Exercise
 {
-    class RoomWithDoor : Room, IHasExteriorDoor
+    class RoomWithDoor : InsideHiding, IHasExteriorDoor
     {
         //private string decor;
         private string doorDescription;
 
-        public RoomWithDoor(string name, string decor, string doorDescription) : base(name, decor)
+        public RoomWithDoor(string name, string decor, string hidingPlace, string doorDescription) : base(name, decor, hidingPlace)
         {
             //this.decor = decor;
             this.doorDescription = doorDescription;

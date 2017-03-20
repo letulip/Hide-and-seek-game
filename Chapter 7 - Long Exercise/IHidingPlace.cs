@@ -8,6 +8,6 @@ namespace Chapter_7___Long_Exercise
 {
     interface IHidingPlace
     {
-        string HidingPlace { get; }
+        string HidingPlaceName { get; }
     }
 }

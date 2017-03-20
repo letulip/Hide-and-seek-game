@@ -57,6 +57,7 @@ namespace Chapter_7___Long_Exercise
         {
             currentLocation = loc;
             cmbxExits.Items.Clear();
+            movesCount++;
 
             if (currentLocation is IHasExteriorDoor)
                 btnThruDoor.Visible = true;
@@ -64,7 +65,11 @@ namespace Chapter_7___Long_Exercise
                 btnThruDoor.Visible = false;
 
             if (currentLocation is IHidingPlace)
+            {
+                IHidingPlace hidingPlace = currentLocation as IHidingPlace;
+                btnCheck.Text = "Check " + hidingPlace.HidingPlaceName;
                 btnCheck.Visible = true;
+            }
 
             tbxDescription.Text = currentLocation.Description;
 
@@ -75,19 +80,19 @@ namespace Chapter_7___Long_Exercise
 
         private void CreateObjects()
         {
-            garden = new Outside("Garden", true);
+            garden = new OutsideHiding("Garden", true, "in bushes");
             driveWay = new Outside("Driveway", false);
-            garage = new Outside("Garage", false);
+            garage = new OutsideHiding("Garage", false, "behind the car");
             backYard = new OutsideWithDoor("Back Yard", true, "a screen door.");
             frontYard = new OutsideWithDoor("Front Yard", false, "an oak door with brass knob.");
-            livingRoom = new RoomWithDoor("Living Room", "an antique carpet", "an oak door with brass knob.");
-            kitchen = new RoomWithDoor("Kitchen", "stainless steel appliances", "a screen door.");
-            diningRoom = new Room("Dining Room", "table in the middle and the sofa");
+            livingRoom = new RoomWithDoor("Living Room", "an antique carpet", "inside the closet", "an oak door with brass knob.");
+            kitchen = new RoomWithDoor("Kitchen", "stainless steel appliances", "in the cabinet", "a screen door.");
+            diningRoom = new InsideHiding("Dining Room", "table in the middle and the sofa", "in the tall armoire");
             stairs = new Room("Stairs", "wooden bannister");
-            upstairsHallway = new Room("Upstairs hallway", "picture of a dog and closet");
-            masterBedroom = new Room("Master bedroom", "large bed");
-            guestBedroom = new Room("Guest bedroom", "couple small beds");
-            bathroom = new Room("Bathroom", "shower, sink and toilet");
+            upstairsHallway = new InsideHiding("Upstairs hallway", "picture of a dog and closet", "in the closet");
+            masterBedroom = new InsideHiding("Master bedroom", "large bed", "under the bed");
+            guestBedroom = new InsideHiding("Guest bedroom", "couple small beds", "under the bed");
+            bathroom = new InsideHiding("Bathroom", "shower, sink and toilet", "behind bath certain");
 
             frontYard.Exits = new Location[] { backYard, garden };
             backYard.Exits = new Location[] { frontYard, garden };
@@ -99,7 +104,7 @@ namespace Chapter_7___Long_Exercise
             kitchen.Exits = new Location[] { diningRoom };
             diningRoom.Exits = new Location[] { livingRoom, kitchen };
             stairs.Exits = new Location[] { upstairsHallway, livingRoom };
-            upstairsHallway.Exits = new Location[] { masterBedroom, guestBedroom, bathroom };
+            upstairsHallway.Exits = new Location[] { masterBedroom, guestBedroom, bathroom, stairs };
             masterBedroom.Exits = new Location[] { upstairsHallway };
             guestBedroom.Exits = new Location[] { upstairsHallway };
             bathroom.Exits = new Location[] { upstairsHallway };
@@ -123,15 +128,18 @@ namespace Chapter_7___Long_Exercise
                     Close();
                 
             }
+            else
+            {
+                tbxDescription.Text += " You found no one here!";
+                btnCheck.Visible = false;
+            }
+            
         }
 
         private void btnHide_Click(object sender, EventArgs e)
         {
             btnHide.Visible = false;
-            btnGoHere.Visible = true;
-            cmbxExits.Visible = true;
 
-            movesCount = 0;
             opponent = new Opponent(driveWay);
 
             if (currentLocation is IHidingPlace)
@@ -139,7 +147,7 @@ namespace Chapter_7___Long_Exercise
 
             for (int i = 0; i < 10; i++)
             {
-                tbxDescription.Text = (i + 1).ToString();
+                tbxDescription.Text = (i + 1) + "...";
                 opponent.Move();
                 Application.DoEvents();
                 System.Threading.Thread.Sleep(250);
@@ -148,18 +156,26 @@ namespace Chapter_7___Long_Exercise
             tbxDescription.Text = "Ready or not, here I come!";
             Application.DoEvents();
             System.Threading.Thread.Sleep(500);
-
+            
+            MoveToANewLocation(driveWay);
             tbxDescription.Text = currentLocation.Description;
-        }
 
-        private void RedrawForm()
-        {
+            btnGoHere.Visible = true;
+            cmbxExits.Visible = true;
 
         }
 
         private void ResetGame()
         {
-            tbxDescription.Text = "You've found opponent here: " + currentLocation.Name + ". It took " + movesCount + " moves.";
+            IHidingPlace foundLocation = currentLocation as IHidingPlace;
+            tbxDescription.Text = "You've found opponent here: " + currentLocation.Name + foundLocation.HidingPlaceName + ". It took you " + movesCount + " moves.";
+
+            movesCount = 0;
+            btnHide.Visible = true;
+            btnCheck.Visible = false;
+            btnGoHere.Visible = false;
+            btnThruDoor.Visible = false;
+            cmbxExits.Visible = false;
         }
     }
 }
