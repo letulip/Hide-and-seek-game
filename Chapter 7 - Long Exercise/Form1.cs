@@ -30,12 +30,12 @@ namespace Chapter_7___Long_Exercise
         Outside garage;
 
         Opponent opponent;
-        
+
         public Form1()
         {
             InitializeComponent();
             CreateObjects();
-            //MoveToANewLocation(driveWay);
+            MoveToANewLocation(driveWay);
             
         }
 
@@ -59,6 +59,9 @@ namespace Chapter_7___Long_Exercise
                 btnThruDoor.Visible = true;
             else
                 btnThruDoor.Visible = false;
+
+            if (currentLocation is IHidingPlace)
+                btnCheck.Visible = true;
 
             tbxDescription.Text = currentLocation.Description;
 
@@ -109,21 +112,44 @@ namespace Chapter_7___Long_Exercise
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            opponent.Check(currentLocation);
+            if(opponent.Check(currentLocation))
+            {
+                
+            }
         }
 
         private void btnHide_Click(object sender, EventArgs e)
         {
             btnHide.Visible = false;
-            btnCheck.Visible = true;
             btnGoHere.Visible = true;
             cmbxExits.Visible = true;
+
+            if (currentLocation is IHidingPlace)
+                btnCheck.Visible = true;
 
             for (int i = 0; i < 10; i++)
             {
                 tbxDescription.Text = (i + 1).ToString();
                 opponent.Move();
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(250);
             }
+
+            tbxDescription.Text = "Ready or not, here I come!";
+            Application.DoEvents();
+            System.Threading.Thread.Sleep(500);
+
+            tbxDescription.Text = currentLocation.Description;
+        }
+
+        private void RedrawForm()
+        {
+
+        }
+
+        private void ResetGame()
+        {
+
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Chapter_7___Long_Exercise
             myLocation = location;
         }
 
-        private void Move()
+        public void Move()
         {
             if(myLocation is IHasExteriorDoor)
                 if(rnd.Next(2) == 1)
@@ -26,7 +26,7 @@ namespace Chapter_7___Long_Exercise
                     
         }
 
-        private bool Check(Location location)
+        public bool Check(Location location)
         {
             if (myLocation == location)
                 return true;
