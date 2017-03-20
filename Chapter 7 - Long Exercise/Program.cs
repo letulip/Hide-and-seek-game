@@ -8,6 +8,7 @@ namespace Chapter_7___Long_Exercise
 {
     static class Program
     {
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -17,6 +18,8 @@ namespace Chapter_7___Long_Exercise
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+            
         }
     }
 }
