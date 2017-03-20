@@ -111,7 +111,7 @@
             this.Controls.Add(this.btnGoHere);
             this.Controls.Add(this.tbxDescription);
             this.Name = "Form1";
-            this.Text = "Explore the house";
+            this.Text = "Hide and Seek!";
             this.ResumeLayout(false);
             this.PerformLayout();
 

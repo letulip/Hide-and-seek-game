@@ -31,12 +31,15 @@ namespace Chapter_7___Long_Exercise
 
         Opponent opponent;
 
+        int movesCount;
+
         public Form1()
         {
             InitializeComponent();
             CreateObjects();
-            MoveToANewLocation(driveWay);
-            
+            //MoveToANewLocation(driveWay);
+            currentLocation = driveWay;
+            tbxDescription.Text = "You and your opponent standing on " + currentLocation.Name;
         }
 
         private void btnGoHere_Click(object sender, EventArgs e)
@@ -106,15 +109,19 @@ namespace Chapter_7___Long_Exercise
 
             kitchen.DoorLocation = backYard;
             backYard.DoorLocation = kitchen;
-
-            opponent = new Opponent(currentLocation);
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
+            movesCount++;
+
             if(opponent.Check(currentLocation))
             {
-                ResetGame();
+                if (MessageBox.Show("Would you like to continue?", "You've found the opponent!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    ResetGame();
+                else
+                    Close();
+                
             }
         }
 
@@ -123,6 +130,9 @@ namespace Chapter_7___Long_Exercise
             btnHide.Visible = false;
             btnGoHere.Visible = true;
             cmbxExits.Visible = true;
+
+            movesCount = 0;
+            opponent = new Opponent(driveWay);
 
             if (currentLocation is IHidingPlace)
                 btnCheck.Visible = true;
@@ -149,7 +159,7 @@ namespace Chapter_7___Long_Exercise
 
         private void ResetGame()
         {
-
+            tbxDescription.Text = "You've found opponent here: " + currentLocation.Name + ". It took " + movesCount + " moves.";
         }
     }
 }
